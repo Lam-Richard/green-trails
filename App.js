@@ -31,7 +31,7 @@ export default function App() {
   const [language, setLanguage] = useState('English');
   const allLanguages = {
     English: 'English',
-    Chinese: '中文'
+    Chinese: '中文',
   }
   const multilingual = {
     English: {
@@ -72,10 +72,12 @@ export default function App() {
     console.log(Object.keys(multilingual[language]['recyclables']))
     console.log('Language changed to', language)
   },[language])
+
+
   return (
     <View style={styles.container}>
       <Languages setLanguage={setLanguage} allLanguages={allLanguages}></Languages>
-
+      <Text>Testing</Text>
       <Text style={styles.headingGood}>{multilingual[language].headings.yes}:</Text>
       <View style={styles.group}>
         {Object.values(multilingual[language]['recyclables']).map(thing => {
