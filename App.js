@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { multilingual, images, badImages } from './utils/data';
 
 const Languages = ({allLanguages, setLanguage}) => {
   return (
@@ -26,68 +27,52 @@ const Language = ({setLanguage, myLanguage, allLanguages}) => {
   )
 }
 
+const Card = ({item, image}) => {
+  return (
+    <View style={{
+      flexDirection: 'column', 
+      justifyContent: 'space-evenly', 
+      textAlign: 'center',
+      fontSize: 20,
+      marginRight: 30,
+      padding: 30,
+      alignItems: 'center'}}>
+      <Text style={{fontSize: '5vh'}}>{item}</Text>
+      <Image 
+        source={image}
+        style={{
+          height: 200, 
+          borderWidth: 1,
+          width: 200}}
+        >
+      </Image>
+    </View>
+  )
+}
+
 export default function App() {
   
   const [language, setLanguage] = useState('English');
   const allLanguages = {
     English: 'English',
     Chinese: '中文',
+    Spanish: 'Español'
   }
-  const multilingual = {
-    English: {
-      headings: {
-        yes: 'Common Recyclables',
-        no: 'Common Not Recyclables'
-      },
-      recyclables: {
-        plastic: 'Plastic',
-        aluminum: 'Aluminum',
-        cardboard: 'Cardboard',
-      },
-      nonrecyclables: {
-        food: 'Food',
-        styrofoam: 'Styrofoam',
-        clothes: 'Clothes'
-      }
-    },
-    Chinese: {
-      headings: {
-        yes: '可回收物',
-        no: '不可回收物'
-      },
-      recyclables: {
-        plastic: '塑料',
-        aluminum: '铝箔',
-        cardboard: '纸板',
-      },
-      nonrecyclables: {
-        food: '食物',
-        styrofoam: '发泡胶',
-        clothes: '衣服'
-      }
-    }
-  }
-  useEffect(()=> {
-    console.log(multilingual[language]['recyclables'].plastic)
-    console.log(Object.keys(multilingual[language]['recyclables']))
-    console.log('Language changed to', language)
-  },[language])
-
 
   return (
     <View style={styles.container}>
       <Languages setLanguage={setLanguage} allLanguages={allLanguages}></Languages>
-      <Text>Testing</Text>
-      <Text style={styles.headingGood}>{multilingual[language].headings.yes}:</Text>
+      <Text style={styles.headingGood}>{multilingual['languages'][language].headings.yes}:</Text>
       <View style={styles.group}>
-        {Object.values(multilingual[language]['recyclables']).map(thing => {
-          return <Text key={thing} style={styles.bullet}>{thing}</Text>
+        {Object.values(multilingual['languages'][language]['recyclables']).map((thing, index) => {
+          console.log("Thing:", thing);
+          return <Card key={thing} image={images[index]} item={thing}/>
         })}
       </View>
-      <Text style={styles.headingBad}>{multilingual[language].headings.no}:</Text>
+      <Text style={styles.headingBad}>{multilingual['languages'][language].headings.no}:</Text>
       <View style={styles.group}>
-        {Object.values(multilingual[language]['nonrecyclables']).map(thing => {
-          return <Text key={thing} style={styles.bullet}>{thing}</Text>
+        {Object.values(multilingual['languages'][language]['nonrecyclables']).map((thing, index) => {
+          return <Card key={thing} image={badImages[index]} item={thing}/>
         })}
       </View>
     </View>
@@ -95,28 +80,43 @@ export default function App() {
 }
 
 const heading =  {
-  fontSize: 100,
+  fontSize: '10vh',
   color: 'green',
+
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    width: '100vw',
+    height: '100vh',
+    overflowY: 'scroll'
 
   },
   headingGood: {
     ...heading,
-    color: 'green'
+    color: 'green',
   },
   headingBad: {
     ...heading,
     color: 'red'
   },
   group: {
-    flexDirection: 'column',
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-evenly',
+    width: 1200,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    borderRadius: 10,
+    padding: 25,   
   },
   bullet: {
-    fontSize: 50
+    fontSize: 30
   }
 });
