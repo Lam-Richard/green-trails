@@ -34,10 +34,10 @@ const Language = ({setLanguage, myLanguage, allLanguages}) => {
 
   return (
 
-      <TouchableOpacity  style={{height: 90, width: 300, borderWidth: 1, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 5,
+      <TouchableOpacity  style={{height: '10vh', width: '20vw', borderWidth: 1, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 5,
       borderStyle: 'solid', borderColor: 'black', textAlign: 'center'}}
         onPress={()=>setLanguage(myLanguage)}>
-        <Text style={{fontSize: 60}}>
+        <Text style={{fontSize: '3vh'}}>
           {allLanguages[myLanguage]}
         </Text>
       </TouchableOpacity>
@@ -50,17 +50,17 @@ const Card = ({item, image}) => {
       flexDirection: 'column', 
       justifyContent: 'space-evenly', 
       textAlign: 'center',
-      fontSize: 20,
-      marginRight: 30,
-      padding: 30,
+      fontSize: '3vh',
+      marginRight: '3vw',
+      padding: '5vh',
       alignItems: 'center'}}>
       <Text style={{fontSize: '5vh'}}>{item}</Text>
       <Image 
         source={image}
         style={{
-          height: 200, 
+          height: '22vh', 
           borderWidth: 1,
-          width: 200}}
+          width: '18vw'}}
         >
       </Image>
     </View>
@@ -162,14 +162,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-evenly',
-    width: 1200,
+    width: '80vw',
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'black',
     borderRadius: 10,
-    padding: 25,   
+    padding: '5vw',   
   },
   bullet: {
-    fontSize: 30
+    fontSize: '5vh'
   }
 });

@@ -63,18 +63,18 @@ export const multilingual = {
           },
           Polish: {
             headings: {
-              yes: 'Reciclables Comunes',
-              no: 'Basura'
+              yes: 'Recykling',
+              no: 'Nie poddawać recyklingowi'
             },
             recyclables: {
-              plastic: 'Plástica',
-              aluminum: 'Aluminio',
-              cardboard: 'Cartulina',
+              plastic: 'Plastikowy',
+              aluminum: 'Aluminium',
+              cardboard: 'Karton',
             },
             nonrecyclables: {
-              food: 'Comida',
-              styrofoam: 'Espuma de poliestireno',
-              clothes: 'Ropa'
+              food: 'Jedzenie',
+              styrofoam: 'Styropian',
+              clothes: 'Ubranie'
             }
           }
     }
