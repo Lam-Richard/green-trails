@@ -2,6 +2,23 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { multilingual, images, badImages } from './utils/data';
+import * as firebase from "firebase/app";
+import "firebase/database";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBgnaKNGyhSoRc5GZNY_pVvvuK-6wkTVR4",
+  authDomain: "green-trails.firebaseapp.com",
+  databaseURL: "https://green-trails-default-rtdb.firebaseio.com",
+  projectId: "green-trails",
+  storageBucket: "green-trails.appspot.com",
+  messagingSenderId: "70270350324",
+  appId: "1:70270350324:web:4982e36004861a91d3bfa1",
+  measurementId: "G-4Y4W93HVHF"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+
 
 const Languages = ({allLanguages, setLanguage}) => {
   return (
@@ -53,11 +70,47 @@ const Card = ({item, image}) => {
 export default function App() {
   
   const [language, setLanguage] = useState('English');
+  const [count, setCount] = useState(0);
+  const [stop, setStop] = useState(null);
   const allLanguages = {
     English: 'English',
     Chinese: '中文',
-    Spanish: 'Español'
+    Spanish: 'Español',
+    Polish: 'Polskie'
   }
+
+  
+
+  function writeUserData() {
+    firebase.database().ref('novisitors').set({
+      count: count + 1
+    });
+  }
+  
+  useEffect(()=> {
+    if (count && !stop) {
+      writeUserData();
+      setStop(true);
+    }
+  },[count, stop]);
+
+  useEffect(() => {
+    const db = firebase.database().ref("novisitors");
+    const handleData = (snap) => {
+      if (snap.val()) {
+        console.log(snap.val());
+        setCount(snap.val().count);
+      }
+    };
+    db.on("value", handleData, (error) => console.log(error));
+    return () => {
+      db.off("value", handleData);
+    };
+  }, []);
+
+
+
+
 
   return (
     <View style={styles.container}>

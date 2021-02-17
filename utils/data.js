@@ -60,6 +60,22 @@ export const multilingual = {
               styrofoam: 'Espuma de poliestireno',
               clothes: 'Ropa'
             }
+          },
+          Polish: {
+            headings: {
+              yes: 'Reciclables Comunes',
+              no: 'Basura'
+            },
+            recyclables: {
+              plastic: 'Plástica',
+              aluminum: 'Aluminio',
+              cardboard: 'Cartulina',
+            },
+            nonrecyclables: {
+              food: 'Comida',
+              styrofoam: 'Espuma de poliestireno',
+              clothes: 'Ropa'
+            }
           }
     }
   }
